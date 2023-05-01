@@ -1,15 +1,20 @@
-import InstructionsView from "../components/InstructionsView";
+import AttentionCheck from "../components/UI/AttentionCheck";
+import InstructionsView from "../components/UI/InstructionsView";
+import { UI_DATA } from "./experiment_config";
+
+const { FIRST_ATTENTION, INSTRUCTIONS } = UI_DATA;
 
 export const experiment_flow = [
-   <InstructionsView
-      title={"instructions 1"}
-      instructions={[
-         "Labore proident amet ullamco reprehenderit eu dolore.",
-         "Nulla et labore id eiusmod sit mollit ad ad aliquip deserunt officia ullamco culpa. Ea ut do velit aute aliquip et. Mollit deserunt irure in dolor. Deserunt qui voluptate culpa laboris ullamco adipisicing qui nulla veniam eu.",
-      ]}
+   <AttentionCheck
+      title={FIRST_ATTENTION.title}
+      instructions={FIRST_ATTENTION.instructions}
+      attention_questions={FIRST_ATTENTION.attention_questions}
    />,
-   <InstructionsView
-      title={"instructions 2"}
-      instructions={["Labore proident amet ullamco reprehenderit eu dolore."]}
-   />,
+   ...INSTRUCTIONS.map((inst, i) => (
+      <InstructionsView
+         title={inst.title}
+         instructions={inst.instructions}
+         key={i}
+      />
+   )),
 ];

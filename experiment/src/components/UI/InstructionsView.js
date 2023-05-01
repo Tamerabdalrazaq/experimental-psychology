@@ -2,13 +2,10 @@ import React from "react";
 
 function InstructionsView({ title, instructions }) {
    return (
-      <div>
+      <div className="instructions-view">
          {title && <h1>{title}</h1>}
          {instructions.map((instruction) => (
-            <>
-               <p>{instruction}</p>
-               {/* <br /> */}
-            </>
+            <p>{instruction}</p>
          ))}
       </div>
    );
