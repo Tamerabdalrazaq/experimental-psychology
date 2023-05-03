@@ -14,8 +14,8 @@ function CountDown({ timeOutCB }) {
          if (ms <= 0) {
             clearInterval(myInterval);
             timeOutCB();
-         } else setMs((ms) => ms - 10);
-      }, 10);
+         } else setMs((ms) => ms - 250);
+      }, 250);
       return () => {
          clearInterval(myInterval);
       };

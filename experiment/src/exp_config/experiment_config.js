@@ -2,7 +2,7 @@ export const config = {
    GAME_CONFIG: {
       opponent_name: "Amir Mizrahi",
       rounds: 30,
-      round_timer: 5000,
+      round_timer: 3500,
    },
 };
 

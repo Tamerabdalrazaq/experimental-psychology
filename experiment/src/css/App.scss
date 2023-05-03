@@ -83,10 +83,29 @@ $width: 45rem;
     justify-content: space-around;
     padding: 1rem 0;
     flex-grow: 1;
+    
     .col {
       display: flex;
       flex-direction: column;
       align-items: center;
+      position: relative;
+      overflow: hidden;
+      .choise-result-slider{
+        h2{
+          font-size: 1.2rem;
+        }
+        animation-name: example;
+        font-weight: bolder;
+        animation-duration: 1.25s;
+        animation-fill-mode: forwards;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @keyframes example {
+          0%   {top: -20px;}
+          100% {top: 65%;}
+        }
+      }
     }
     .player-card{
         border: 3px solid #282c34;
@@ -132,9 +151,15 @@ $width: 45rem;
 }
 
 
-.green-circle{
+
+.status-circle{
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background-color: green;
+  &.gray{
+    background-color: #282c34;
+  }
+  &.blue {
+    background-color: rgb(33, 95, 166);
+  }
 }

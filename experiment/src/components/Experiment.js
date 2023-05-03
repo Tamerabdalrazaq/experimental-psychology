@@ -5,7 +5,6 @@ import { experiment_flow } from "../exp_config/experiment_flow";
 
 function Experiment() {
    const [progress, setProgress] = useState(0);
-
    const childRef = useRef(null);
 
    const el = React.createElement(

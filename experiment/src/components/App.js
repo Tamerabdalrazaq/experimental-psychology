@@ -1,11 +1,14 @@
+import { SubjectContextProvider } from "../context/SubjectContext";
 import "../css/App.scss";
 import Experiment from "./Experiment";
 
 function App() {
    return (
-      <div className="App">
-         <Experiment />
-      </div>
+      <SubjectContextProvider>
+         <div className="App">
+            <Experiment />
+         </div>
+      </SubjectContextProvider>
    );
 }
 
