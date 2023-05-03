@@ -28,6 +28,8 @@ $width: 45rem;
     height: $height - 5rem;
     overflow-y: scroll;
     margin-bottom: 15px;
+    border: 2.5px solid #282c34;
+    padding: 3px;
   }
   .bottom{
     height: 4.5rem;
@@ -60,12 +62,13 @@ $width: 45rem;
   .checklist{
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
+    font-size: 1.3rem;
     width: fit-content;
     span{
       text-align: left;
       input{
         margin-right: .4rem;
+        transform: scale(1.34);
       }
     }
   }
