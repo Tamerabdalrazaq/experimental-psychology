@@ -73,3 +73,68 @@ $width: 45rem;
     }
   }
 }
+
+.game-view{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .players{
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+    flex-grow: 1;
+    .col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .player-card{
+        border: 3px solid #282c34;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        width: 15rem;
+        height: 6rem;
+        border-radius: 5px;
+
+        .choise-status{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+
+  .buttons{
+    button{
+      margin: 20px;
+    }
+  }
+
+  .floating-timer {
+    position: absolute;
+    bottom: 45%;
+    left: 50%;
+    transform: translate(-50%);
+    width: 10rem;
+    div, span{
+      width: 8rem;
+      margin: auto;
+
+      h2{
+        text-align: center;
+        width: 8rem;
+      }
+    }
+  }
+}
+
+
+.green-circle{
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: green;
+}

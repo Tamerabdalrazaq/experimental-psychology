@@ -1,7 +1,9 @@
-import AttentionCheck from "../components/UI/AttentionCheck";
-import InstructionsView from "../components/UI/InstructionsView";
-import { UI_DATA } from "./experiment_config";
+import AttentionCheck from "../components/views/AttentionCheck";
+import InstructionsView from "../components/views/InstructionsView";
+import GameView from "../components/views/GameView";
+import { UI_DATA, config } from "./experiment_config";
 
+const { GAME_CONFIG } = config;
 const { FIRST_ATTENTION, INSTRUCTIONS } = UI_DATA;
 
 export const experiment_flow = [
@@ -17,4 +19,5 @@ export const experiment_flow = [
          key={i}
       />
    )),
+   <GameView opponent_name={GAME_CONFIG.opponent_name} />,
 ];

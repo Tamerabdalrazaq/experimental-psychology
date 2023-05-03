@@ -1,3 +1,11 @@
+export const config = {
+   GAME_CONFIG: {
+      opponent_name: "Amir Mizrahi",
+      rounds: 30,
+      round_timer: 5000,
+   },
+};
+
 export const UI_DATA = {
    FIRST_ATTENTION: {
       title: "First Attention Check",
