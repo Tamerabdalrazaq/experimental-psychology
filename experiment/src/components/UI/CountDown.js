@@ -8,18 +8,20 @@ const {
 } = config;
 
 function CountDown({ timeOutCB }) {
-   const [ms, setMs] = useState(round_timer);
+   const [start] = useState(Date.now());
+   const [now, setNow] = useState(start);
+   const counter = round_timer - (now - start);
    useEffect(() => {
       let myInterval = setInterval(() => {
-         if (ms <= 0) {
+         if (counter <= 0) {
             clearInterval(myInterval);
             timeOutCB();
-         } else setMs((ms) => ms - 250);
-      }, 250);
+         } else setNow(Date.now());
+      }, 100);
       return () => {
          clearInterval(myInterval);
       };
-   });
+   }, [now]);
 
    return (
       <div>
@@ -27,7 +29,7 @@ function CountDown({ timeOutCB }) {
             <ClockLoader />
          </div>
          <div>
-            <h2>{msToSeconds(ms)}</h2>
+            <h2>{msToSeconds(counter)}</h2>
          </div>
       </div>
    );

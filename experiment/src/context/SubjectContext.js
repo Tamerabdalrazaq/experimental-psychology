@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
+import { config } from "../exp_config/experiment_config";
 
 export const SubjectContext = React.createContext();
+
+const types = config.GAME_TYPES;
 
 export function SubjectContextProvider({ children }) {
    const trainingSet = useRef([]);
@@ -10,9 +13,9 @@ export function SubjectContextProvider({ children }) {
    return (
       <SubjectContext.Provider
          value={{
-            trainingSet,
-            set_1,
-            set_2,
+            [types.training]: trainingSet,
+            [types.set_1]: set_1,
+            [types.set_2]: set_2,
          }}
       >
          {children}

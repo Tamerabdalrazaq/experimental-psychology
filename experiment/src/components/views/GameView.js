@@ -12,10 +12,10 @@ const initialInputs = {
 
 const { rounds } = config.GAME_CONFIG;
 
-function GameView({ opponent_name }) {
+function GameView({ opponent_name, type }) {
    const subjectContext = useContext(SubjectContext);
-   const { trainingSet } = subjectContext;
-   console.log(trainingSet.current);
+   const set_history = subjectContext[type];
+   console.log(set_history.current);
    const [subjectChoise, setSubjectChoise] = useState(null);
    const [computertChoise, setComputertChoise] = useState(null);
    const [timerOn, setTimerOn] = useState(true);
@@ -47,7 +47,7 @@ function GameView({ opponent_name }) {
 
    function resetRound() {
       if (bothPlayersReady()) {
-         trainingSet.current.push([
+         set_history.current.push([
             currentInputs.current.subject,
             currentInputs.current.computer,
          ]);
@@ -75,8 +75,7 @@ function GameView({ opponent_name }) {
    };
 
    const handleKeyPress = (e) => {
-      if (["d", "D", "k", "K"].includes(e.key))
-         buttonClick(e.key.toUpperCase());
+      if (["KeyD", "KeyK"].includes(e.code)) buttonClick(e.key.toUpperCase());
    };
 
    return (
@@ -112,7 +111,7 @@ function GameView({ opponent_name }) {
                <CountDown timeOutCB={onTimeOut} />
             </div>
          )}
-         {`round: ${trainingSet.current.length}\\${rounds}`}
+         {`round: ${set_history.current.length}\\${rounds}`}
       </div>
    );
 }

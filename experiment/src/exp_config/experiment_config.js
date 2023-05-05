@@ -2,7 +2,21 @@ export const config = {
    GAME_CONFIG: {
       opponent_name: "Amir Mizrahi",
       rounds: 30,
-      round_timer: 3500,
+      round_timer: 8000,
+      computer_delay: [500, 3000],
+      inputs: {
+         COOPORATE_KEY: "K",
+         SOLO_KEY: "D",
+      },
+   },
+   GAME_TYPES: {
+      training: "TRAIN",
+      set_1: "SET_1",
+      set_2: "SET_2",
+   },
+   ALGORITHM: {
+      BETRAYAL: 7,
+      FOREGIVENESS: 33,
    },
 };
 
@@ -24,7 +38,24 @@ export const UI_DATA = {
          { label: "Please do not check this box", checked: false },
       ],
    },
-   INSTRUCTIONS: [
+   SECOND_ATTENTION: {
+      title: "Set 1\\2 Completed!",
+      instructions: [
+         "You have completed the first set with Amir Mizrahi, in the next part you will continue playing another set of rounds with the same player.",
+      ],
+      attention_questions: [
+         {
+            label: "Are you in an interruption-free environment? ",
+            checked: true,
+         },
+         { label: "Please do not check this box", checked: false },
+         {
+            label: "Is your phone on silent / off? (Please check this box if so) ",
+            checked: true,
+         },
+      ],
+   },
+   INSTRUCTIONS_ARRAY: [
       {
          title: "Welcome!",
          instructions: [
@@ -65,4 +96,11 @@ export const UI_DATA = {
          ],
       },
    ],
+   POST_LEARNING_INSTRUCTIONS: {
+      title: "Learning Phase Completed!",
+      instructions: [
+         "Thank you for playing the first training set. The score previously would not count towards your final score.",
+         "You will now continue to play against the same player. From now on your behavior would count towards your final score",
+      ],
+   },
 };
