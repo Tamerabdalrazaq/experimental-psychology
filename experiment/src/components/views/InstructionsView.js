@@ -4,8 +4,8 @@ function InstructionsView({ title, instructions }) {
    return (
       <div className="instructions-view">
          {title && <h1>{title}</h1>}
-         {instructions.map((instruction) => (
-            <p>{instruction}</p>
+         {instructions.map((instruction, i) => (
+            <p key={i}>{instruction}</p>
          ))}
       </div>
    );

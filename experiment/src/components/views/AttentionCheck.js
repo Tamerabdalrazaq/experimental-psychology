@@ -26,7 +26,7 @@ const AttentionCheck = forwardRef(
             <InstructionsView title={title} instructions={instructions} />
             <div className="checklist">
                {attention_questions.map((question, index) => (
-                  <span>
+                  <span key={index}>
                      <input
                         type={"checkbox"}
                         id={`checkbox-${index}`}

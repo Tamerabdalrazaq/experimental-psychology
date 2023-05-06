@@ -1,9 +1,14 @@
 import { FaRegHandshake } from "react-icons/fa";
 import { AiOutlineDisconnect } from "react-icons/ai";
+import { config } from "../../exp_config/experiment_config";
+
+const {
+   inputs: { COOPORATE_KEY, SOLO_KEY },
+} = config.GAME_CONFIG;
 
 const choise_meanings = {
-   D: ["Solo-Played", <AiOutlineDisconnect size={80} />],
-   K: ["Cooporated", <FaRegHandshake size={80} />],
+   [SOLO_KEY]: ["Solo-Played", <AiOutlineDisconnect size={80} />],
+   [COOPORATE_KEY]: ["Cooporated", <FaRegHandshake size={80} />],
 };
 
 function ChoiseIcon({ choise }) {
@@ -11,7 +16,7 @@ function ChoiseIcon({ choise }) {
       <div
          className="choise-result-slider"
          style={{
-            color: choise === "D" ? "#A30000" : "green",
+            color: choise === SOLO_KEY ? "#A30000" : "green",
          }}
       >
          {choise_meanings[choise][1]}

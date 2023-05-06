@@ -2,7 +2,7 @@ export const config = {
    GAME_CONFIG: {
       opponent_name: "Amir Mizrahi",
       rounds: 30,
-      round_timer: 8000,
+      round_timer: 3000,
       computer_delay: [500, 3000],
       inputs: {
          COOPORATE_KEY: "K",

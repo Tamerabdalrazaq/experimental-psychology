@@ -2,6 +2,9 @@ import { config } from "../exp_config/experiment_config";
 
 const {
    ALGORITHM: { BETRAYAL, FOREGIVENESS },
+   GAME_CONFIG: {
+      inputs: { COOPORATE_KEY, SOLO_KEY },
+   },
 } = config;
 
 // Converts ms to format sec:ms
@@ -15,10 +18,13 @@ export function msToSeconds(ms) {
 
 // Decides whether to cooporate or not base on the last round with BETRAYAL%, FOREGIVENESS%
 export function getComputerDecision(setHistory) {
-   const subject_cooporated = setHistory[setHistory.length - 2];
+   const subject_cooporated =
+      !setHistory.length ||
+      setHistory[setHistory.length - 1][0] === COOPORATE_KEY;
    const rand = Math.random();
-   if (subject_cooporated) return rand >= BETRAYAL / 100;
-   else return rand <= FOREGIVENESS / 100;
+   if (subject_cooporated)
+      return rand >= BETRAYAL / 100 ? COOPORATE_KEY : SOLO_KEY;
+   else return rand <= FOREGIVENESS / 100 ? COOPORATE_KEY : SOLO_KEY;
 }
 
 // returns a random integer in range [a,b)

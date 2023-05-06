@@ -4,18 +4,22 @@ import PlayerCard from "../UI/PlayerCard";
 import { SubjectContext } from "../../context/SubjectContext";
 import ChoiseIcon from "../UI/ChoiseIcon";
 import { config } from "../../exp_config/experiment_config";
+import { getComputerDecision, randRange } from "../../helpers/helpers";
 
 const initialInputs = {
    subject: null,
    computer: null,
 };
 
-const { rounds } = config.GAME_CONFIG;
+const {
+   rounds,
+   inputs: { COOPORATE_KEY, SOLO_KEY },
+   computer_delay: COMPUTER_DELAY,
+} = config.GAME_CONFIG;
 
 function GameView({ opponent_name, type }) {
    const subjectContext = useContext(SubjectContext);
    const set_history = subjectContext[type];
-   console.log(set_history.current);
    const [subjectChoise, setSubjectChoise] = useState(null);
    const [computertChoise, setComputertChoise] = useState(null);
    const [timerOn, setTimerOn] = useState(true);
@@ -31,14 +35,19 @@ function GameView({ opponent_name, type }) {
    }, []);
 
    useEffect(() => {
-      setTimeout(() => {
-         setComputertChoise("K");
-         currentInputs.current.computer = "K";
+      if (computertChoise)
+         console.error("Timer on while generating computer response");
+      const rand_time = randRange(COMPUTER_DELAY[0], COMPUTER_DELAY[1]);
+      const timeout = setTimeout(() => {
+         setComputertChoise(getComputerDecision(set_history.current));
+         currentInputs.current.computer = COOPORATE_KEY;
          checkRoundEnd();
-      }, 1500);
+      }, rand_time);
+      return () => clearTimeout(timeout);
    }, [round]);
 
    function onTimeOut() {
+      if (!timerOn) return;
       setTimerOn(false);
       setTimeout(() => {
          resetRound();
@@ -69,13 +78,15 @@ function GameView({ opponent_name, type }) {
    };
 
    const buttonClick = (choise) => {
+      console.log(timerOn);
+      if (!timerOn || currentInputs.current.subject) return;
       setSubjectChoise(choise);
       currentInputs.current.subject = choise;
       checkRoundEnd(choise);
    };
 
    const handleKeyPress = (e) => {
-      if (["KeyD", "KeyK"].includes(e.code)) buttonClick(e.key.toUpperCase());
+      if (["KeyD", "KeyK"].includes(e.code)) buttonClick(e.code.slice(-1));
    };
 
    return (
@@ -99,11 +110,14 @@ function GameView({ opponent_name, type }) {
             </div>
          </div>
          <div className="buttons">
-            <button disabled={!timerOn} onClick={() => buttonClick("D")}>
-               Solo-Move (Press "D")
+            <button disabled={!timerOn} onClick={() => buttonClick(SOLO_KEY)}>
+               Solo-Move (Press {SOLO_KEY})
             </button>
-            <button disabled={!timerOn} onClick={() => buttonClick("K")}>
-               Cooporate (Press "K")
+            <button
+               disabled={!timerOn}
+               onClick={() => buttonClick(COOPORATE_KEY)}
+            >
+               Cooporate (Press {COOPORATE_KEY})
             </button>
          </div>
          {timerOn && (
