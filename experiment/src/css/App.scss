@@ -1,5 +1,5 @@
-$height: 35rem;
-$width: 45rem; 
+$container-height: 35rem;
+$container-width: 45rem; 
 
 html {
   font-size: 18px;
@@ -18,8 +18,8 @@ html {
 }
 
 .exp_container{
-  width: $width;
-  height: $height;
+  width: $container-width;
+  height: $container-height;
   background-color: #f3f3f3;
   color: #282c34;
   border-radius: 5px;
@@ -29,7 +29,7 @@ html {
   flex-direction: column;
   .top{
     flex-grow: 1;
-    height: $height - 5rem;
+    height: $container-height - 5rem;
     overflow-y: scroll;
     margin-bottom: 15px;
     border: 2.5px solid #282c34;
