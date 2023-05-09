@@ -17,7 +17,7 @@ const {
    computer_delay: COMPUTER_DELAY,
 } = config.GAME_CONFIG;
 
-function Game({ opponent_name, type }) {
+function Game({ opponent_name, type, setFinished }) {
    const subjectContext = useContext(SubjectContext);
    const set_history = subjectContext[type];
    const [subjectChoise, setSubjectChoise] = useState(null);
@@ -35,6 +35,7 @@ function Game({ opponent_name, type }) {
    }, [timerOn]);
 
    useEffect(() => {
+      if (set_history.current.length >= rounds) return setFinished(true);
       if (computertChoise)
          console.error("Timer on while generating computer response");
       const rand_time = randRange(COMPUTER_DELAY[0], COMPUTER_DELAY[1]);
