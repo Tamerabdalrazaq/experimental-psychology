@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import CountUp from "react-countup";
 import { BounceLoader } from "react-spinners";
 
-function PlayerCard({ name, ready, timerOn }) {
+function PlayerCard({ name, ready, timerOn, wallet }) {
+   const currentWallet = useRef(0);
+   useEffect(() => {
+      currentWallet.current = wallet;
+   }, [wallet]);
    return (
       <div className="player-card opponent">
          {<h3>{name}</h3>}
@@ -17,6 +22,10 @@ function PlayerCard({ name, ready, timerOn }) {
             ) : (
                <div className="status-circle blue"></div>
             )}
+         </div>
+         <div className={`wallet ${wallet > 999 ? "small" : ""}`}>
+            <CountUp start={currentWallet.current} end={wallet} />
+            {}₪
          </div>
       </div>
    );

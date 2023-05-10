@@ -10,7 +10,14 @@ export function SubjectContextProvider({ children }) {
    const set_1 = useRef([]);
    const set_2 = useRef([]);
    const screened_out = useRef(false);
+   const wallet = useRef({
+      subject: 0,
+      computer: 0,
+   });
 
+   function resetWallet() {
+      wallet.current = { subject: 0, computer: 0 };
+   }
    return (
       <SubjectContext.Provider
          value={{
@@ -18,6 +25,8 @@ export function SubjectContextProvider({ children }) {
             [types.set_1]: set_1,
             [types.set_2]: set_2,
             screened_out,
+            wallet,
+            resetWallet,
          }}
       >
          {children}

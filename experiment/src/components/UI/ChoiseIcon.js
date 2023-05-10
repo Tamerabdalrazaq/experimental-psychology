@@ -17,9 +17,11 @@ function ChoiseIcon({ choise, top }) {
          className={`choise-result-slider ${
             top ? "slide-bottom" : "slide-top"
          }`}
-         style={{
-            color: choise === SOLO_KEY ? "#A30000" : "green",
-         }}
+         style={
+            {
+               // color: choise === SOLO_KEY ? "#A30000" : "green",
+            }
+         }
       >
          {choise_meanings[choise][1]}
          <h2>{choise_meanings[choise][0]}</h2>

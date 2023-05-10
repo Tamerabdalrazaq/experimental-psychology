@@ -5,6 +5,7 @@ const {
    GAME_CONFIG: {
       inputs: { COOPORATE_KEY, SOLO_KEY },
    },
+   REDAWRDS: { C_C, S_C, S_S },
 } = config;
 
 // Converts ms to format sec:ms
@@ -31,4 +32,14 @@ export function getComputerDecision(setHistory) {
 export function randRange(a, b) {
    let rand = Math.random();
    return a + Math.floor(rand * (b - a));
+}
+
+export function getRewards(subjectChoise, computerChoise) {
+   if (subjectChoise === COOPORATE_KEY)
+      if (computerChoise === COOPORATE_KEY) return [...C_C];
+      else return [S_C[1], S_C[0]];
+   else if (subjectChoise === SOLO_KEY) {
+      if (computerChoise === COOPORATE_KEY) return [...S_C];
+      else return [...S_S];
+   }
 }

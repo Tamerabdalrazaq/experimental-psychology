@@ -18,6 +18,11 @@ export const config = {
       BETRAYAL: 7,
       FOREGIVENESS: 33,
    },
+   REDAWRDS: {
+      C_C: [30, 30],
+      S_C: [20, 0],
+      S_S: [10, 10],
+   },
 };
 
 export const UI_DATA = {

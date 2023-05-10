@@ -4,7 +4,11 @@ import PlayerCard from "../UI/PlayerCard";
 import { SubjectContext } from "../../context/SubjectContext";
 import ChoiseIcon from "../UI/ChoiseIcon";
 import { config } from "../../exp_config/experiment_config";
-import { getComputerDecision, randRange } from "../../helpers/helpers";
+import {
+   getComputerDecision,
+   getRewards,
+   randRange,
+} from "../../helpers/helpers";
 
 const initialInputs = {
    subject: null,
@@ -24,8 +28,15 @@ function Game({ opponent_name, type, setFinished }) {
    const [computertChoise, setComputertChoise] = useState(null);
    const [timerOn, setTimerOn] = useState(true);
    const [round, setRound] = useState(0);
+   const [subjectWallet, setSubjectWallet] = useState(0);
+   const [computerWallet, setComputerWallet] = useState(0);
 
    const currentInputs = useRef({ ...initialInputs });
+
+   useEffect(() => {
+      setSubjectWallet(subjectContext.wallet.current.subject);
+      setComputerWallet(subjectContext.wallet.current.computer);
+   }, []);
 
    useEffect(() => {
       window.addEventListener("keydown", handleKeyPress);
@@ -36,13 +47,11 @@ function Game({ opponent_name, type, setFinished }) {
 
    useEffect(() => {
       if (set_history.current.length >= rounds) return setFinished(true);
-      if (computertChoise)
-         console.error("Timer on while generating computer response");
       const rand_time = randRange(COMPUTER_DELAY[0], COMPUTER_DELAY[1]);
       const timeout = setTimeout(() => {
-         console.log("channing comp choiise");
-         setComputertChoise(getComputerDecision(set_history.current));
-         currentInputs.current.computer = COOPORATE_KEY;
+         const choise = getComputerDecision(set_history.current);
+         setComputertChoise(choise);
+         currentInputs.current.computer = choise;
          checkRoundEnd();
       }, rand_time);
       return () => clearTimeout(timeout);
@@ -51,9 +60,28 @@ function Game({ opponent_name, type, setFinished }) {
    function onTimeOut() {
       if (!timerOn) return;
       setTimerOn(false);
+      bothPlayersReady() && updateWallet();
       setTimeout(() => {
          resetRound();
       }, 2000);
+   }
+
+   function updateWallet() {
+      const [sub, comp] = getRewards(
+         currentInputs.current.subject,
+         currentInputs.current.computer
+      );
+      const updated_subject_wallet =
+         subjectContext.wallet.current.subject + sub;
+      const updated_computer_wallet =
+         subjectContext.wallet.current.computer + comp;
+
+      subjectContext.wallet.current = {
+         subject: subjectContext.wallet.current.subject + sub,
+         computer: subjectContext.wallet.current.computer + comp,
+      };
+      setSubjectWallet(updated_subject_wallet);
+      setComputerWallet(updated_computer_wallet);
    }
 
    function resetRound() {
@@ -99,6 +127,7 @@ function Game({ opponent_name, type, setFinished }) {
                   name={opponent_name}
                   timerOn={timerOn}
                   ready={computertChoise}
+                  wallet={computerWallet}
                />
                {bothPlayersReady() && (
                   <ChoiseIcon choise={computertChoise} top={true} />
@@ -126,6 +155,7 @@ function Game({ opponent_name, type, setFinished }) {
                   name={"You"}
                   timerOn={timerOn}
                   ready={subjectChoise}
+                  wallet={subjectWallet}
                />
                {bothPlayersReady() && (
                   <ChoiseIcon choise={subjectChoise} top={false} />
