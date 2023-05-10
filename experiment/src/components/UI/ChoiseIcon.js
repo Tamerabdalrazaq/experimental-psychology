@@ -7,14 +7,16 @@ const {
 } = config.GAME_CONFIG;
 
 const choise_meanings = {
-   [SOLO_KEY]: ["Solo-Played", <AiOutlineDisconnect size={80} />],
-   [COOPORATE_KEY]: ["Cooporated", <FaRegHandshake size={80} />],
+   [SOLO_KEY]: ["Solo-Played", <AiOutlineDisconnect size={50} />],
+   [COOPORATE_KEY]: ["Cooporated", <FaRegHandshake size={50} />],
 };
 
-function ChoiseIcon({ choise }) {
+function ChoiseIcon({ choise, top }) {
    return (
       <div
-         className="choise-result-slider"
+         className={`choise-result-slider ${
+            top ? "slide-bottom" : "slide-top"
+         }`}
          style={{
             color: choise === SOLO_KEY ? "#A30000" : "green",
          }}

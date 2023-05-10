@@ -1,4 +1,3 @@
-import ClockLoader from "react-spinners/ClockLoader";
 import { config } from "../../exp_config/experiment_config";
 import { useEffect, useState } from "react";
 import { msToSeconds } from "../../helpers/helpers";
@@ -8,28 +7,24 @@ const {
 } = config;
 
 function CountDown({ timeOutCB }) {
-   const [start] = useState(Date.now());
-   const [now, setNow] = useState(start);
-   const counter = round_timer - (now - start);
+   const [counter, setCounter] = useState(round_timer / 1000);
+
    useEffect(() => {
       let myInterval = setInterval(() => {
          if (counter <= 0) {
             clearInterval(myInterval);
             timeOutCB();
-         } else setNow(Date.now());
-      }, 100);
+         } else setCounter((current) => current - 1);
+      }, 1000);
       return () => {
          clearInterval(myInterval);
       };
-   }, [now]);
+   }, [counter]);
 
    return (
       <div>
          <div>
-            <ClockLoader />
-         </div>
-         <div>
-            <h2>{msToSeconds(counter)}</h2>
+            <h2>{counter}</h2>
          </div>
       </div>
    );

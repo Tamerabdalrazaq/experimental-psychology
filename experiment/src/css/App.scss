@@ -84,32 +84,50 @@ html {
   height: 100%;
   .players{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
     padding: 1rem 0;
     flex-grow: 1;
+    overflow: hidden;
     
-    .col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .player_row {
       position: relative;
-      overflow: hidden;
+      height: fit-content;
+      display: flex;
+      justify-content: center;
       .choise-result-slider{
         h2{
           font-size: 1.2rem;
         }
-        animation-name: example;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         font-weight: bolder;
         animation-duration: 1.25s;
         animation-fill-mode: forwards;
         position: absolute;
         left: 50%;
-        transform: translate(-50%, -50%);
-        @keyframes example {
-          0%   {top: -20px;}
-          100% {top: 65%;}
+        transform: translateX(-50%);
+      }
+
+      .slide-bottom {
+        animation-name: animate-bottom;
+        flex-direction: column-reverse;
+
+        @keyframes animate-bottom {
+          0%   {bottom: -20px;}
+          100% {bottom: -6rem;}
         }
       }
+      .slide-top {
+        animation-name: animate-top;
+        @keyframes animate-top {
+          0%   {bottom: 20px;}
+          100% {bottom: 6rem;}
+        }
+      }
+
     }
     .player-card{
         border: 3px solid #282c34;
@@ -117,10 +135,14 @@ html {
         justify-content: center;
         align-items: center;
         gap: 1rem;
-        padding: 1rem 2rem;
-        width: 15rem;
-        height: 6rem;
+        padding: .3rem .6rem;
+        width: 12rem;
+        height: 4rem;
         border-radius: 5px;
+
+        h3{
+          font-size: 1.4rem;
+        }
 
         .choise-status{
           display: flex;
@@ -131,24 +153,28 @@ html {
     }
 
   .buttons{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
     button{
       margin: 20px;
     }
   }
 
   .floating-timer {
-    position: absolute;
-    bottom: 45%;
-    left: 50%;
-    transform: translate(-50%);
-    width: 10rem;
+    // position: absolute;
+    // bottom: 45%;
+    // left: 50%;
+    // transform: translate(-50%);
+    width: 6rem;
     div, span{
-      width: 8rem;
-      margin: auto;
+      // width: 8rem;
+      // margin: auto;
 
       h2{
         text-align: center;
-        width: 8rem;
+        // width: 8rem;
       }
     }
   }
@@ -199,7 +225,7 @@ html {
     background-color: #282c34;
   }
   &.blue {
-    background-color: rgb(33, 95, 166);
+    background-color: rgb(81, 188, 255);
   }
 }
 

@@ -94,42 +94,44 @@ function Game({ opponent_name, type, setFinished }) {
    return (
       <div className="game-view">
          <div className="players">
-            <div className="col">
-               <PlayerCard
-                  name={"You"}
-                  timerOn={timerOn}
-                  ready={subjectChoise}
-               />
-               {bothPlayersReady() && <ChoiseIcon choise={subjectChoise} />}
-            </div>
-            <div className="col">
+            <div className="player_row">
                <PlayerCard
                   name={opponent_name}
                   timerOn={timerOn}
                   ready={computertChoise}
                />
-               {bothPlayersReady() && <ChoiseIcon choise={computertChoise} />}
+               {bothPlayersReady() && (
+                  <ChoiseIcon choise={computertChoise} top={true} />
+               )}
+            </div>
+            <div className="buttons">
+               <button
+                  disabled={!timerOn || subjectChoise}
+                  onClick={() => buttonClick(SOLO_KEY)}
+               >
+                  Solo-Move (Press {SOLO_KEY})
+               </button>
+               <div className="floating-timer">
+                  {timerOn && <CountDown timeOutCB={onTimeOut} />}
+               </div>
+               <button
+                  disabled={!timerOn || subjectChoise}
+                  onClick={() => buttonClick(COOPORATE_KEY)}
+               >
+                  Cooporate (Press {COOPORATE_KEY})
+               </button>
+            </div>
+            <div className="player_row">
+               <PlayerCard
+                  name={"You"}
+                  timerOn={timerOn}
+                  ready={subjectChoise}
+               />
+               {bothPlayersReady() && (
+                  <ChoiseIcon choise={subjectChoise} top={false} />
+               )}
             </div>
          </div>
-         <div className="buttons">
-            <button
-               disabled={!timerOn || subjectChoise}
-               onClick={() => buttonClick(SOLO_KEY)}
-            >
-               Solo-Move (Press {SOLO_KEY})
-            </button>
-            <button
-               disabled={!timerOn || subjectChoise}
-               onClick={() => buttonClick(COOPORATE_KEY)}
-            >
-               Cooporate (Press {COOPORATE_KEY})
-            </button>
-         </div>
-         {timerOn && (
-            <div className="floating-timer">
-               <CountDown timeOutCB={onTimeOut} />
-            </div>
-         )}
          {`round: ${set_history.current.length}\\${rounds}`}
       </div>
    );

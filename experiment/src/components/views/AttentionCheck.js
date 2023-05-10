@@ -1,17 +1,22 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, {
+   useState,
+   forwardRef,
+   useImperativeHandle,
+   useContext,
+} from "react";
 import InstructionsView from "./InstructionsView";
+import { SubjectContext } from "../../context/SubjectContext";
 
 const AttentionCheck = forwardRef(
    ({ title, instructions, attention_questions, setChildReady }, ref) => {
       const [checkedNum, setCheckedNum] = useState(0);
-      const [attentive, setAttentive] = useState(true);
+      const subjectContext = useContext(SubjectContext);
 
       useImperativeHandle(ref, () => ({
          allow_next() {
             const allowed = checkedNum === attention_questions.length - 1;
-            if (allowed) return true;
-            setAttentive(false);
-            return false;
+            if (!allowed) subjectContext.screened_out.current = true;
+            return true;
          },
       }));
 
@@ -33,10 +38,7 @@ const AttentionCheck = forwardRef(
                         key={index}
                         onClick={(e) => handleCheckClick(e, question)}
                      />
-                     <label
-                        htmlFor={`checkbox-${index}`}
-                        style={{ color: `${!attentive && "red"}` }}
-                     >
+                     <label htmlFor={`checkbox-${index}`}>
                         {question.label}
                      </label>
                   </span>
