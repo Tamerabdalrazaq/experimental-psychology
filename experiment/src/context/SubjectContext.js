@@ -14,6 +14,7 @@ export function SubjectContextProvider({ children }) {
       subject: 0,
       computer: 0,
    });
+   const dictator_input = useRef();
 
    function resetWallet() {
       wallet.current = { subject: 0, computer: 0 };
@@ -27,6 +28,7 @@ export function SubjectContextProvider({ children }) {
             screened_out,
             wallet,
             resetWallet,
+            dictator_input,
          }}
       >
          {children}

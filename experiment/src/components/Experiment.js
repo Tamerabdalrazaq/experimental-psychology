@@ -7,6 +7,9 @@ function Experiment() {
    const [progress, setProgress] = useState(0);
    const childRef = useRef(null);
 
+   const next_button = experiment_flow[progress].props.next_button;
+   const prev_button = experiment_flow[progress].props.prev_button;
+
    const el = React.createElement(
       experiment_flow[progress].type,
       {
@@ -37,7 +40,9 @@ function Experiment() {
          <div className="bottom">
             <div className="buttons">
                <button onClick={() => button_click(-1)}>previous</button>
-               <button onClick={() => button_click(1)}>next</button>
+               <button onClick={() => button_click(1)}>
+                  {next_button || "next"}
+               </button>
             </div>
             <ProgressBar
                animated

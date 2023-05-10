@@ -249,7 +249,31 @@ button {
       100% {transform: scale(0);}
     }
   }
+}
 
+.dictator-game-container{
+  .range-input{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .text-input{
+    width: 2.4rem !important;
+    text-align: center;
+    border: none;
+    border-bottom: 3px solid #282c34;
+    background-color: transparent;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
 }
 
 .status-circle{

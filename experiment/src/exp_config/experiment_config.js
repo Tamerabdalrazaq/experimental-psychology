@@ -1,3 +1,5 @@
+import { bold_underlineText } from "../helpers/semantics";
+
 export const config = {
    GAME_CONFIG: {
       opponent_name: "Amir Mizrahi",
@@ -23,6 +25,7 @@ export const config = {
       S_C: [20, 0],
       S_S: [10, 10],
    },
+   DICTATORS_GAME_MONEY: 100,
 };
 
 export const UI_DATA = {
@@ -106,6 +109,20 @@ export const UI_DATA = {
       instructions: [
          "Thank you for playing the first training set. The score previously would not count towards your final score.",
          "You will now continue to play against the same player. From now on your behavior would count towards your final score",
+      ],
+   },
+   DICTATOR_GAME_INSTRUCTIONS: {
+      title: "Dictator Game",
+      instructions: [
+         <>
+            Before calculating the final score, You are given an{" "}
+            {bold_underlineText("extra 100")} points.
+         </>,
+         "You can choose if and how much to split it with Amir. ",
+         <>
+            Please choose how much to {bold_underlineText("give")} Amir, the
+            remainder would be added to your final amount.
+         </>,
       ],
    },
 };
