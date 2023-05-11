@@ -125,4 +125,22 @@ export const UI_DATA = {
          </>,
       ],
    },
+   GENERAL_QUESTIONS: {
+      title: "General Questions",
+      instructions: [],
+      q_1: "Do you think your behavior / Average contribution changed before and after the 20 second break?",
+      q_2: "If your behavior changed, Why do you think it changed?",
+      q_3: "What do you think was the purpose of this study? ",
+   },
+   DEBRIEF: {
+      title: "Debrief",
+      instructions: [
+         "Thanks for participating in our study. ",
+         <>
+            We would like to remind you that you played against a{" "}
+            {bold_underlineText("computer")}.
+         </>,
+         "The study was conducted in order to test if and how people play cooperative games based on timing and types of information presented to them.",
+      ],
+   },
 };

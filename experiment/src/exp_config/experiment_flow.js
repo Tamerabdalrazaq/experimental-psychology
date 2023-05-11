@@ -3,6 +3,8 @@ import InstructionsView from "../components/views/InstructionsView";
 import GameView from "../components/views/GameView";
 import { UI_DATA, config } from "./experiment_config";
 import DictatorGameView from "../components/views/DictatorGameView";
+import GeneralQuestionsView from "../components/views/GeneralQuestionsView";
+import DebriefView from "../components/views/DebriefView";
 
 const { GAME_CONFIG, GAME_TYPES } = config;
 const {
@@ -11,6 +13,7 @@ const {
    POST_LEARNING_INSTRUCTIONS,
    SECOND_ATTENTION,
    DICTATOR_GAME_INSTRUCTIONS,
+   DEBRIEF,
 } = UI_DATA;
 
 export const experiment_flow = [
@@ -53,4 +56,6 @@ export const experiment_flow = [
       next_button={"Finish"}
       prev_button={false}
    />,
+   <GeneralQuestionsView />,
+   <DebriefView title={DEBRIEF.title} instructions={DEBRIEF.instructions} />,
 ];

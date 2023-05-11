@@ -15,6 +15,7 @@ export function SubjectContextProvider({ children }) {
       computer: 0,
    });
    const dictator_input = useRef();
+   const general_questions = useRef({});
 
    function resetWallet() {
       wallet.current = { subject: 0, computer: 0 };
@@ -29,6 +30,7 @@ export function SubjectContextProvider({ children }) {
             wallet,
             resetWallet,
             dictator_input,
+            general_questions,
          }}
       >
          {children}
