@@ -11,8 +11,8 @@ import { SubjectContext } from "../../context/SubjectContext";
 const GeneralQuestionsView = forwardRef(({}, ref) => {
    const subjectContext = useContext(SubjectContext);
    const [q_1, setQ_1] = useState(false);
-   const [q_2, setQ_2] = useState();
-   const [q_3, setQ_3] = useState();
+   const [q_2, setQ_2] = useState("");
+   const [q_3, setQ_3] = useState("");
 
    useImperativeHandle(ref, () => ({
       allow_next() {
