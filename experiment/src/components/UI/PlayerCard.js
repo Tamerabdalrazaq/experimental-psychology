@@ -8,7 +8,7 @@ function PlayerCard({ name, ready, timerOn, wallet }) {
       currentWallet.current = wallet;
    }, [wallet]);
    return (
-      <div className="player-card opponent">
+      <div className={`player-card ${name === "You" ? "you" : "opponent"}`}>
          {<h3>{name}</h3>}
          <div className="choise-status">
             {!timerOn ? (
@@ -25,7 +25,6 @@ function PlayerCard({ name, ready, timerOn, wallet }) {
          </div>
          <div className={`wallet ${wallet > 999 ? "small" : ""}`}>
             <CountUp start={currentWallet.current} end={wallet} />
-            {}₪
          </div>
       </div>
    );

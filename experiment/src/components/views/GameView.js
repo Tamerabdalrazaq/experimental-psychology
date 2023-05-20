@@ -7,8 +7,9 @@ import { SubjectContext } from "../../context/SubjectContext";
 const { GAME_TYPES } = config;
 
 function GameView({ opponent_name, type }) {
+   const learning = type === GAME_TYPES.learning;
    const subjectContext = useContext(SubjectContext);
-   const [gameOn, setGameOn] = useState(false);
+   const [gameOn, setGameOn] = useState(learning);
    const [countdown, setCountdown] = useState(3);
    const [finished, setFinished] = useState(false);
 
@@ -18,13 +19,15 @@ function GameView({ opponent_name, type }) {
    }, []);
 
    useEffect(() => {
-      const interval = setInterval(() => setCountdown((c) => c - 1), 1000);
-      return () => clearInterval(interval);
+      if (!learning) {
+         const interval = setInterval(() => setCountdown((c) => c - 1), 1000);
+         return () => clearInterval(interval);
+      }
    }, [countdown]);
 
    return finished ? (
       <FinishedSet />
-   ) : gameOn ? (
+   ) : gameOn || learning ? (
       <Game
          opponent_name={opponent_name}
          type={type}

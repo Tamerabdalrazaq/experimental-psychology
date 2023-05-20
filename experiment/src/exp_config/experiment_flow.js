@@ -14,6 +14,7 @@ const {
    SECOND_ATTENTION,
    DICTATOR_GAME_INSTRUCTIONS,
    DEBRIEF,
+   FIRST_SET_FINISHED,
 } = UI_DATA;
 
 export const experiment_flow = [
@@ -31,11 +32,19 @@ export const experiment_flow = [
    )),
    <GameView
       opponent_name={GAME_CONFIG.opponent_name}
-      type={GAME_TYPES.training}
+      type={GAME_TYPES.learning}
    />,
    <InstructionsView
       title={POST_LEARNING_INSTRUCTIONS.title}
       instructions={POST_LEARNING_INSTRUCTIONS.instructions}
+   />,
+   <GameView
+      opponent_name={GAME_CONFIG.opponent_name}
+      type={GAME_TYPES.training}
+   />,
+   <InstructionsView
+      title={FIRST_SET_FINISHED.title}
+      instructions={FIRST_SET_FINISHED.instructions}
    />,
    <GameView
       opponent_name={GAME_CONFIG.opponent_name}

@@ -1,9 +1,21 @@
 import { bold_underlineText } from "../helpers/semantics";
 
+const GAME_TYPES = {
+   learning: "LEARNING",
+   training: "TRAINING",
+   set_1: "SET_1",
+   set_2: "SET_2",
+};
+
 export const config = {
    GAME_CONFIG: {
-      opponent_name: "Amir Mizrahi",
-      rounds: 5,
+      opponent_name: "Dana Mizrahi",
+      rounds: {
+         [GAME_TYPES.learning]: 3,
+         [GAME_TYPES.training]: 3,
+         [GAME_TYPES.set_1]: 3,
+         [GAME_TYPES.set_2]: 3,
+      },
       round_timer: 3000,
       computer_delay: [500, 3000],
       inputs: {
@@ -11,11 +23,7 @@ export const config = {
          SOLO_KEY: "D",
       },
    },
-   GAME_TYPES: {
-      training: "TRAINING",
-      set_1: "SET_1",
-      set_2: "SET_2",
-   },
+   GAME_TYPES,
    ALGORITHM: {
       BETRAYAL: 7,
       FOREGIVENESS: 33,
@@ -27,6 +35,48 @@ export const config = {
    },
    DICTATORS_GAME_MONEY: 100,
 };
+
+export const tutorial_steps = [
+   {
+      selector: ".game-view",
+      content: "Welcome! We are going to make a brief tour in the game",
+   },
+   {
+      selector: ".player-card.opponent",
+      content: "This is your opponent.",
+   },
+   {
+      selector: "div.choise-status",
+      content:
+         "This circle indicate the status of the player. \n A blue circle indicates that the player has already played",
+   },
+   {
+      selector: "div.wallet",
+      content: "Here is the score of the player",
+   },
+   {
+      selector: "div.choise-buttons > button:nth-child(1)",
+      content: "Use these buttons to choose your play each round",
+   },
+   {
+      selector: "div.choise-buttons > button:nth-child(3)",
+      content:
+         "You can either click on the button, or press on the corresponding key on your keyboard",
+   },
+   {
+      selector: ".player-card.you",
+      content: "This is you. \n all data are symmetrical to above.",
+   },
+   {
+      selector: ".player-card.you .choise-status",
+      content: "A gray animating circle means the player has not played yet.",
+   },
+   {
+      selector: ".floating-timer",
+      content:
+         "You will play 3 round so that you understand the flow of the game. Press X when ready!",
+   },
+];
 
 export const UI_DATA = {
    FIRST_ATTENTION: {
@@ -46,8 +96,13 @@ export const UI_DATA = {
          { label: "Please do not check this box", checked: false },
       ],
    },
+
+   FIRST_SET_FINISHED: {
+      title: "Set 1\\3 Completed!",
+      instructions: [],
+   },
    SECOND_ATTENTION: {
-      title: "Set 1\\2 Completed!",
+      title: "Set 2\\3 Completed!",
       instructions: [
          "You have completed the first set with Amir Mizrahi, in the next part you will continue playing another set of rounds with the same player.",
       ],
@@ -110,6 +165,10 @@ export const UI_DATA = {
          "Thank you for playing the first training set. The score previously would not count towards your final score.",
          "You will now continue to play against the same player. From now on your behavior would count towards your final score",
       ],
+   },
+   POST_LEARNING_INSTRUCTIONS: {
+      title: "Let the game begin!",
+      instructions: [""],
    },
    DICTATOR_GAME_INSTRUCTIONS: {
       title: "Dictator Game",

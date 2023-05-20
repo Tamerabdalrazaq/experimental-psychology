@@ -10,8 +10,8 @@ const {
 const handleSubmit = (data) => {
    const ref = collection(firestore, "test_data");
    const trimmed = prepare_data_shipping(data);
-   alert("hi");
-   alert(JSON.stringify(trimmed).split(',"').join("\n"));
+   alert("(DEBUGGING) to see the data, press F12 -> console");
+   console.log(JSON.stringify(trimmed));
    try {
       // addDoc(ref, trimmed);
    } catch (err) {
@@ -50,9 +50,9 @@ function prepare_gamesets_shipping(set) {
       computer_cooporations += round[1] === inputs.COOPORATE_KEY ? 1 : 0;
    });
    return {
-      subject_round: keyboard_to_binary(subject_round),
+      subject_round: JSON.stringify(keyboard_to_binary(subject_round)),
       subject_cooporations,
-      computer_round: keyboard_to_binary(computer_round),
+      computer_round: JSON.stringify(keyboard_to_binary(computer_round)),
       computer_cooporations,
    };
 }

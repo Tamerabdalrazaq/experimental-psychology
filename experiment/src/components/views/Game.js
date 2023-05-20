@@ -3,20 +3,24 @@ import CountDown from "../UI/CountDown";
 import PlayerCard from "../UI/PlayerCard";
 import { SubjectContext } from "../../context/SubjectContext";
 import ChoiseIcon from "../UI/ChoiseIcon";
-import { config } from "../../exp_config/experiment_config";
+import { config, tutorial_steps } from "../../exp_config/experiment_config";
 import {
    getComputerDecision,
    getRewards,
    randRange,
 } from "../../helpers/helpers";
+import Tour from "reactour";
+import useTour from "../../features/useTour";
 
 const initialInputs = {
    subject: null,
    computer: null,
 };
 
+const { GAME_TYPES } = config;
+
 const {
-   rounds,
+   rounds: _rounds,
    inputs: { COOPORATE_KEY, SOLO_KEY },
    computer_delay: COMPUTER_DELAY,
 } = config.GAME_CONFIG;
@@ -30,6 +34,9 @@ function Game({ opponent_name, type, setFinished }) {
    const [round, setRound] = useState(0);
    const [subjectWallet, setSubjectWallet] = useState(0);
    const [computerWallet, setComputerWallet] = useState(0);
+   const { closeTour, tourOn } = useTour(type);
+
+   const rounds = _rounds[type];
 
    const currentInputs = useRef({ ...initialInputs });
 
@@ -108,7 +115,7 @@ function Game({ opponent_name, type, setFinished }) {
    };
 
    const buttonClick = (choise) => {
-      if (!timerOn || currentInputs.current.subject) return;
+      if (!timerOn || currentInputs.current.subject || tourOn) return;
       setSubjectChoise(choise);
       currentInputs.current.subject = choise;
       checkRoundEnd(choise);
@@ -120,50 +127,61 @@ function Game({ opponent_name, type, setFinished }) {
    };
 
    return (
-      <div className="game-view">
-         <div className="players">
-            <div className="player_row">
-               <PlayerCard
-                  name={opponent_name}
-                  timerOn={timerOn}
-                  ready={computertChoise}
-                  wallet={computerWallet}
-               />
-               {bothPlayersReady() && (
-                  <ChoiseIcon choise={computertChoise} top={true} />
-               )}
-            </div>
-            <div className="buttons">
-               <button
-                  disabled={!timerOn || subjectChoise}
-                  onClick={() => buttonClick(SOLO_KEY)}
-               >
-                  Solo-Move (Press {SOLO_KEY})
-               </button>
-               <div className="floating-timer">
-                  {timerOn && <CountDown timeOutCB={onTimeOut} />}
+      <>
+         {tourOn && (
+            <Tour
+               steps={tutorial_steps}
+               isOpen={type === GAME_TYPES.learning}
+               onRequestClose={closeTour}
+            />
+         )}
+         <div className="game-view">
+            <div className="players">
+               <div className="player_row">
+                  <PlayerCard
+                     name={opponent_name}
+                     timerOn={timerOn}
+                     ready={computertChoise}
+                     wallet={computerWallet}
+                  />
+                  {bothPlayersReady() && (
+                     <ChoiseIcon choise={computertChoise} top={true} />
+                  )}
                </div>
-               <button
-                  disabled={!timerOn || subjectChoise}
-                  onClick={() => buttonClick(COOPORATE_KEY)}
-               >
-                  Cooporate (Press {COOPORATE_KEY})
-               </button>
+               <div className="choise-buttons">
+                  <button
+                     disabled={!timerOn || subjectChoise}
+                     onClick={() => buttonClick(SOLO_KEY)}
+                  >
+                     Solo-Move (Press {SOLO_KEY})
+                  </button>
+                  <div className="floating-timer">
+                     {!tourOn && timerOn && <CountDown timeOutCB={onTimeOut} />}
+                  </div>
+                  <button
+                     disabled={!timerOn || subjectChoise}
+                     onClick={() => buttonClick(COOPORATE_KEY)}
+                  >
+                     Cooporate (Press {COOPORATE_KEY})
+                  </button>
+               </div>
+               <div className="player_row">
+                  <PlayerCard
+                     name={"You"}
+                     timerOn={timerOn}
+                     ready={subjectChoise}
+                     wallet={subjectWallet}
+                  />
+                  {bothPlayersReady() && (
+                     <ChoiseIcon choise={subjectChoise} top={false} />
+                  )}
+               </div>
             </div>
-            <div className="player_row">
-               <PlayerCard
-                  name={"You"}
-                  timerOn={timerOn}
-                  ready={subjectChoise}
-                  wallet={subjectWallet}
-               />
-               {bothPlayersReady() && (
-                  <ChoiseIcon choise={subjectChoise} top={false} />
-               )}
-            </div>
+            <span className="round-num">
+               {`round: ${set_history.current.length}\\${rounds}`}
+            </span>
          </div>
-         {`round: ${set_history.current.length}\\${rounds}`}
-      </div>
+      </>
    );
 }
 
