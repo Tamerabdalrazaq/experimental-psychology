@@ -1,24 +1,25 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "../css/App.scss";
-import { experiment_flow } from "../exp_config/experiment_flow";
+import useExperimentFlow from "../exp_config/useExperimentFlow";
+import { UI_DATA, GAME_TYPES } from "../exp_config/experiment_config";
+import { SubjectContext } from "../context/SubjectContext";
 
 function Experiment() {
    const [progress, setProgress] = useState(0);
    const childRef = useRef(null);
+   const experimentFlow = useExperimentFlow();
+   const { lang, subject_type } = useContext(SubjectContext);
 
-   const next_button = experiment_flow[progress].props.next_button;
-   const prev_button = experiment_flow[progress].props.prev_button;
+   const current_view = experimentFlow[progress];
+   const next_button = current_view.props.next_button;
+   const prev_button = current_view.props.prev_button;
 
-   const el = React.createElement(
-      experiment_flow[progress].type,
-      {
-         ...experiment_flow[progress].props,
-         ref: childRef,
-      },
-      experiment_flow[progress].children
-   );
-
+   useEffect(() => {
+      if (current_view.props.type === GAME_TYPES.training) {
+         window.localStorage.setItem("subject_exposed_to_training", true);
+      }
+   }, [current_view.props.type]);
    const button_click = (dir) => {
       if (
          !childRef.current ||
@@ -26,27 +27,48 @@ function Experiment() {
          childRef.current.allow_next()
       ) {
          setProgress((curr) => {
-            return Math.min(
-               Math.max(curr + dir, 0),
-               experiment_flow.length - 1
-            );
+            return Math.min(Math.max(curr + dir, 0), experimentFlow.length - 1);
          });
       }
    };
 
+   const el = React.createElement(
+      current_view.type,
+      {
+         ...current_view.props,
+         ref: childRef,
+         move: button_click,
+      },
+      current_view.children
+   );
+
+   const showButtons = () => progress < experimentFlow.length - 1;
+
    return (
-      <div className="exp_container">
+      <div
+         className="exp_container"
+         style={{ direction: lang === "AR" ? "rtl" : "ltr" }}
+      >
+         <h6>DEV MODE - Subject Type: {subject_type?.current}</h6>
+
          <div className="top">{el}</div>
          <div className="bottom">
-            <div className="buttons">
-               <button onClick={() => button_click(-1)}>previous</button>
-               <button onClick={() => button_click(1)}>
-                  {next_button || "next"}
-               </button>
-            </div>
+            {showButtons() && (
+               <div className="buttons">
+                  <button
+                     disabled={prev_button === "disabled"}
+                     onClick={() => button_click(-1)}
+                  >
+                     {UI_DATA.BUTTONS.PREV[lang]}
+                  </button>
+                  <button onClick={() => button_click(1)}>
+                     {next_button || UI_DATA.BUTTONS.NEXT[lang]}
+                  </button>
+               </div>
+            )}
             <ProgressBar
-               animated
-               now={(progress / (experiment_flow.length - 1)) * 100}
+               animated={showButtons()}
+               now={(progress / (experimentFlow.length - 1)) * 100}
                label={""}
             />
          </div>

@@ -1,4 +1,4 @@
-import { config } from "../exp_config/experiment_config";
+import { config, tutorial_steps } from "../exp_config/experiment_config";
 
 const {
    ALGORITHM: { BETRAYAL, FOREGIVENESS },
@@ -42,4 +42,32 @@ export function getRewards(subjectChoise, computerChoise) {
       if (computerChoise === COOPORATE_KEY) return [...S_C];
       else return [...S_S];
    }
+}
+
+export function getValByLang(obj, lang) {
+   if (typeof obj !== "object") return obj;
+   if (!obj[lang]) return obj;
+   return obj[lang];
+}
+
+export function getArrByLang(arr, lang) {
+   return arr.map((el) => el[lang]);
+}
+
+export function getTutorialByLang(lang) {
+   return tutorial_steps.map((step) => ({
+      selector: step.selector,
+      content: step.content[lang],
+   }));
+}
+
+export function getDate() {
+   const today = new Date();
+   const date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+   return date;
 }

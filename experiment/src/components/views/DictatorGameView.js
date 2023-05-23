@@ -8,9 +8,38 @@ import Form from "react-bootstrap/Form";
 import InstructionsView from "./InstructionsView";
 import { config } from "../../exp_config/experiment_config";
 import { SubjectContext } from "../../context/SubjectContext";
+import { bold_underlineText } from "../../helpers/semantics";
+import { getArrByLang, getValByLang } from "../../helpers/helpers";
 
-const DictatorGameView = forwardRef(({ title, instructions }, ref) => {
+const DictatorGameView = forwardRef(({}, ref) => {
    const subjectContext = useContext(SubjectContext);
+   const { lang } = subjectContext;
+
+   const DATA = {
+      title: { EN: "Dictator Game", AR: "أراك عصيّ الدمع شيمتك الصبر" },
+      instructions: [
+         {
+            EN: (
+               <p>
+                  Before calculating the final score, You are given an{" "}
+                  {bold_underlineText("extra 100")} points.
+               </p>
+            ),
+            AR: "أراك عصيّ الدمع شيمتك الصبر",
+         },
+         "You can choose if and how much to split it with Amir. ",
+         {
+            EN: (
+               <p>
+                  Please choose how much to {bold_underlineText("give")}{" "}
+                  {subjectContext.getOpName()}, the remainder would be added to
+                  your final amount.
+               </p>
+            ),
+            AR: "أراك عصيّ الدمع شيمتك الصبر",
+         },
+      ],
+   };
    const [input, setInput] = useState(
       Math.floor(config.DICTATORS_GAME_MONEY / 2)
    );
@@ -30,10 +59,13 @@ const DictatorGameView = forwardRef(({ title, instructions }, ref) => {
 
    return (
       <div className="dictator-game-container">
-         <InstructionsView title={title} instructions={instructions} />
+         <InstructionsView
+            title={getValByLang(DATA.title, lang)}
+            instructions={getArrByLang(DATA.instructions, lang)}
+         />
          <div className="range-input">
             <Form.Label>
-               Give {config.GAME_CONFIG.opponent_name}{" "}
+               Give {bold_underlineText(subjectContext.getOpName())}{" "}
                <input
                   type="number"
                   min={0}
@@ -45,8 +77,7 @@ const DictatorGameView = forwardRef(({ title, instructions }, ref) => {
                   }
                   className="text-input"
                   value={input}
-               />{" "}
-               ₪
+               />
             </Form.Label>
             <Form.Range
                style={{ width: "50%" }}

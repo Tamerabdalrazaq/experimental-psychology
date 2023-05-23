@@ -5,11 +5,13 @@ import React, {
    useState,
 } from "react";
 import InstructionsView from "./InstructionsView";
-import { UI_DATA, config } from "../../exp_config/experiment_config";
+import { UI_DATA } from "../../exp_config/experiment_config";
 import { SubjectContext } from "../../context/SubjectContext";
+import { getArrByLang, getValByLang } from "../../helpers/helpers";
 
 const GeneralQuestionsView = forwardRef(({}, ref) => {
    const subjectContext = useContext(SubjectContext);
+   const { lang } = subjectContext;
    const [q_1, setQ_1] = useState(false);
    const [q_2, setQ_2] = useState("");
    const [q_3, setQ_3] = useState("");
@@ -28,12 +30,17 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
    return (
       <div className="general-questions">
          <InstructionsView
-            title={UI_DATA.GENERAL_QUESTIONS.title}
-            instructions={UI_DATA.GENERAL_QUESTIONS.instructions}
+            title={getValByLang(UI_DATA.GENERAL_QUESTIONS.title, lang)}
+            instructions={getArrByLang(
+               UI_DATA.GENERAL_QUESTIONS.instructions,
+               lang
+            )}
          />
          <div className="questions">
             <span>
-               <label for={"q_1"}>{UI_DATA.GENERAL_QUESTIONS.q_1}</label>
+               <label for={"q_1"}>
+                  {getValByLang(UI_DATA.GENERAL_QUESTIONS.q_1, lang)}
+               </label>
                <select
                   id="q_1"
                   value={q_1}
@@ -43,7 +50,9 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
                   <option value={true}>Yes</option>
                </select>
             </span>
-            <label for={"q_2"}>{UI_DATA.GENERAL_QUESTIONS.q_2}</label>
+            <label for={"q_2"}>
+               {getValByLang(UI_DATA.GENERAL_QUESTIONS.q_2, lang)}
+            </label>
             <textarea
                className="form-control"
                placeholder="Please explain..."
@@ -51,7 +60,9 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
                value={q_2}
                onChange={(e) => setQ_2(e.target.value)}
             ></textarea>
-            <label for={"q_3"}>{UI_DATA.GENERAL_QUESTIONS.q_3}</label>
+            <label for={"q_3"}>
+               {getValByLang(UI_DATA.GENERAL_QUESTIONS.q_3, lang)}
+            </label>
             <textarea
                className="form-control"
                placeholder="Please explain..."

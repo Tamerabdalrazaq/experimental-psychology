@@ -4,9 +4,13 @@ function InstructionsView({ title, instructions }) {
    return (
       <div className="instructions-view">
          {title && <h1>{title}</h1>}
-         {instructions.map((instruction, i) => (
-            <p key={i}>{instruction}</p>
-         ))}
+         {instructions.map((instruction, i) => {
+            return typeof instruction === "string" ? (
+               <p key={i}>{instruction}</p>
+            ) : (
+               <span key={i}>{instruction}</span>
+            );
+         })}
       </div>
    );
 }
