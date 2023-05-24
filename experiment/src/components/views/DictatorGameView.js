@@ -16,7 +16,7 @@ const DictatorGameView = forwardRef(({}, ref) => {
    const { lang } = subjectContext;
 
    const DATA = {
-      title: { EN: "Dictator Game", AR: "أراك عصيّ الدمع شيمتك الصبر" },
+      title: { EN: "Dictator Game", AR: "لعبة الدكتاتور" },
       instructions: [
          {
             EN: (
@@ -25,9 +25,17 @@ const DictatorGameView = forwardRef(({}, ref) => {
                   {bold_underlineText("extra 100")} points.
                </p>
             ),
-            AR: "أراك عصيّ الدمع شيمتك الصبر",
+            AR: (
+               <p>
+                  {"قبل حساب المجموع النهائي، سنقوم بإعطائك"}
+                  {bold_underlineText(" 100 نقطة إضافيّة")}
+               </p>
+            ),
          },
-         "You can choose if and how much to split it with Amir. ",
+         {
+            EN: "You can choose if and how much to split it with Amir. ",
+            AR: "يمكنك  ان تختاري كم ستتاشركين مع دانة.",
+         },
          {
             EN: (
                <p>
@@ -36,10 +44,23 @@ const DictatorGameView = forwardRef(({}, ref) => {
                   your final amount.
                </p>
             ),
-            AR: "أراك عصيّ الدمع شيمتك الصبر",
+            AR: (
+               <p>
+                  {" اختاري كم تريدين"}
+                  {bold_underlineText(" إعطاء " + subjectContext.getOpName())}
+                  {"."}
+                  القيمة التي ستختارينها ستَضاف للنتيجة النهائية لكما وفقاً لما
+                  أخترتِ
+               </p>
+            ),
          },
       ],
+      GIVE: {
+         EN: "Give",
+         AR: "أعطِ",
+      },
    };
+
    const [input, setInput] = useState(
       Math.floor(config.DICTATORS_GAME_MONEY / 2)
    );
@@ -65,7 +86,8 @@ const DictatorGameView = forwardRef(({}, ref) => {
          />
          <div className="range-input">
             <Form.Label>
-               Give {bold_underlineText(subjectContext.getOpName())}{" "}
+               {DATA.GIVE[lang]}{" "}
+               {bold_underlineText(subjectContext.getOpName())}{" "}
                <input
                   type="number"
                   min={0}

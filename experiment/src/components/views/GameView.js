@@ -50,7 +50,10 @@ const GameView = forwardRef(({ type, opponent_name, your_name }, ref) => {
       <FinishedSet />
    ) : gameOn || learning ? (
       <Game
-         opponent_name={opponent_name || subjectContext.getOpName()}
+         opponent_name={
+            opponent_name ||
+            subjectContext.getOpName(type === GAME_TYPES.training)
+         }
          type={type}
          setFinished={setFinished}
          your_name={your_name}

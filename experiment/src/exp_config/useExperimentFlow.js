@@ -11,9 +11,11 @@ import { SubjectContext } from "../context/SubjectContext";
 import { getArrByLang, getValByLang } from "../helpers/helpers";
 import { useContext, useMemo } from "react";
 import SelectLanguageView from "../components/views/SelectLanguageView";
+import AgreementTerms from "../components/UI/AgreementTerms";
 
 const { GAME_CONFIG, GAME_TYPES } = config;
 const {
+   AGREEMENT_INSTRUCTIONS,
    FIRST_ATTENTION,
    INSTRUCTIONS_ARRAY,
    POST_LEARNING_INSTRUCTIONS,
@@ -34,7 +36,16 @@ export default function useExperimentFlow() {
    const experiment_flow = useMemo(
       () => [
          <SelectLanguageView />,
+         <AgreementTerms
+            title={getValByLang(AGREEMENT_INSTRUCTIONS.title, lang)}
+            instructions={getArrByLang(
+               AGREEMENT_INSTRUCTIONS.instructions,
+               lang
+            )}
+            next_button={lang === "AR" ? "أوافق، أكمل" : "I Agree, continue"}
+         />,
          <AttentionCheck
+            id={FIRST_ATTENTION.id}
             title={getValByLang(FIRST_ATTENTION.title, lang)}
             instructions={getArrByLang(FIRST_ATTENTION.instructions, lang)}
             attention_questions={getArrByLang(
@@ -42,13 +53,15 @@ export default function useExperimentFlow() {
                lang
             )}
          />,
-         ...INSTRUCTIONS_ARRAY.map((inst, i) => (
-            <InstructionsView
-               title={getValByLang(inst.title, lang)}
-               instructions={getArrByLang(inst.instructions, lang)}
-               key={i}
-            />
-         )),
+         ...INSTRUCTIONS_ARRAY.map((inst, i) => {
+            return (
+               <InstructionsView
+                  title={getValByLang(inst.title, lang)}
+                  instructions={getArrByLang(inst.instructions, lang)}
+                  key={i}
+               />
+            );
+         }),
          <GameView
             opponent_name={{ EN: "Opponent", AR: "الغريم" }[lang]}
             your_name={getName()}

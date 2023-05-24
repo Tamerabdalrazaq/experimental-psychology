@@ -46,8 +46,8 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
                   value={q_1}
                   onChange={(e) => setQ_1(e.target.value)}
                >
-                  <option value={false}>No</option>
-                  <option value={true}>Yes</option>
+                  <option value={false}>{lang === "EN" ? "No" : "لا"}</option>
+                  <option value={true}>{lang === "EN" ? "No" : "نعم"}</option>
                </select>
             </span>
             <label for={"q_2"}>
@@ -55,7 +55,9 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
             </label>
             <textarea
                className="form-control"
-               placeholder="Please explain..."
+               placeholder={
+                  lang === "EN" ? "Please Explain..." : "يرجى التوضيح..."
+               }
                id="q_2"
                value={q_2}
                onChange={(e) => setQ_2(e.target.value)}
@@ -65,7 +67,9 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
             </label>
             <textarea
                className="form-control"
-               placeholder="Please explain..."
+               placeholder={
+                  lang === "EN" ? "Please Explain..." : "يرجى التوضيح..."
+               }
                id="q_3"
                value={q_3}
                onChange={(e) => setQ_3(e.target.value)}

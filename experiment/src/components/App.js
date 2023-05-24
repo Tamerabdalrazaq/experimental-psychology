@@ -11,13 +11,14 @@ function App() {
    );
    useEffect(() => {
       if (window.innerWidth <= 800) setShowMobileWarning(true);
+      if (subject_exposed_to_training)
+         console.error("Subject was exposed before!");
    }, []);
 
    if (showMobileWarning) return <MobileWarning />;
    return (
       <SubjectContextProvider>
          <div className="App">
-            <h6>subject_exposed_to_training: {subject_exposed_to_training}</h6>
             <Experiment />
          </div>
       </SubjectContextProvider>

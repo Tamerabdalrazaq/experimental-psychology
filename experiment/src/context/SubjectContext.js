@@ -25,7 +25,7 @@ export function SubjectContextProvider({ children }) {
    const [nameExposed, setNameExposed] = useState(false);
    const dictator_input = useRef();
    const general_questions = useRef({});
-   const [lang, setLang] = useState("EN");
+   const [lang, setLang] = useState("AR");
 
    useEffect(() => {
       const rand = Math.random();
@@ -33,13 +33,15 @@ export function SubjectContextProvider({ children }) {
       else if (rand < 0.5) subject_type.current = EARLY_OUT;
       else if (rand < 0.75) subject_type.current = LATE_IN;
       else if (rand <= 1) subject_type.current = LATE_OUT;
+      console.log("[DEV] Subject Type: " + subject_type.current);
    }, []);
 
    function resetWallet() {
       wallet.current = { subject: 0, computer: 0 };
    }
 
-   function getOpName() {
+   function getOpName(first = false) {
+      if (first) return getFirstName(op_name.IN[lang]);
       if (subject_type.current === EARLY_IN) return op_name.IN[lang];
       else if (subject_type.current === EARLY_OUT) return op_name.OUT[lang];
       else if (subject_type.current === LATE_IN)

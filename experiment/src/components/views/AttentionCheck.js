@@ -15,6 +15,7 @@ const AttentionCheck = forwardRef(
          attention_title,
          attention_questions,
          setChildReady,
+         id,
       },
       ref
    ) => {
@@ -23,10 +24,10 @@ const AttentionCheck = forwardRef(
       useImperativeHandle(ref, () => ({
          allow_next() {
             const allowed = checkedNum === attention_questions.length - 1;
-            if (!allowed) {
-               alert("(Debugging) Subject is screened out!");
-               subjectContext.screened_out.current = true;
-            }
+            subjectContext.screened_out.current = {
+               ...subjectContext.screened_out.current,
+               [id]: allowed,
+            };
             return true;
          },
       }));
@@ -40,21 +41,23 @@ const AttentionCheck = forwardRef(
       return (
          <div className="attention-check">
             <InstructionsView title={title} instructions={instructions} />
-            <label htmlFor="attention_clist">{attention_title}</label>
-            <div id="attention_clist" className="checklist">
-               {attention_questions.map((question, index) => (
-                  <span key={index}>
-                     <input
-                        type={"checkbox"}
-                        id={`checkbox-${index}`}
-                        key={index}
-                        onClick={(e) => handleCheckClick(e, question)}
-                     />
-                     <label htmlFor={`checkbox-${index}`}>
-                        {question.label}
-                     </label>
-                  </span>
-               ))}
+            <div className="questions">
+               <label htmlFor="attention_clist">{attention_title}</label>
+               <div id="attention_clist" className="checklist">
+                  {attention_questions.map((question, index) => (
+                     <span key={index}>
+                        <input
+                           type={"checkbox"}
+                           id={`checkbox-${index}`}
+                           key={index}
+                           onClick={(e) => handleCheckClick(e, question)}
+                        />
+                        <label htmlFor={`checkbox-${index}`}>
+                           {question.label}
+                        </label>
+                     </span>
+                  ))}
+               </div>
             </div>
          </div>
       );

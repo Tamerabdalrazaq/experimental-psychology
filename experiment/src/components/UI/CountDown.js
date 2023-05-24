@@ -24,7 +24,7 @@ function CountDown({ timeOutCB }) {
    return (
       <div>
          <div>
-            <h2>{counter}</h2>
+            <h2>{counter != 0 ? counter : <h6>Time Out - Restarting..</h6>}</h2>
          </div>
       </div>
    );

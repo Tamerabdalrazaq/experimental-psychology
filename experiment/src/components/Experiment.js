@@ -49,8 +49,6 @@ function Experiment() {
          className="exp_container"
          style={{ direction: lang === "AR" ? "rtl" : "ltr" }}
       >
-         <h6>DEV MODE - Subject Type: {subject_type?.current}</h6>
-
          <div className="top">{el}</div>
          <div className="bottom">
             {showButtons() && (
