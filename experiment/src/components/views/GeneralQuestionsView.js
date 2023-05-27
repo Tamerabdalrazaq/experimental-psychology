@@ -47,7 +47,7 @@ const GeneralQuestionsView = forwardRef(({}, ref) => {
                   onChange={(e) => setQ_1(e.target.value)}
                >
                   <option value={false}>{lang === "EN" ? "No" : "لا"}</option>
-                  <option value={true}>{lang === "EN" ? "No" : "نعم"}</option>
+                  <option value={true}>{lang === "EN" ? "Yes" : "نعم"}</option>
                </select>
             </span>
             <label for={"q_2"}>

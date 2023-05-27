@@ -2,13 +2,13 @@ import React, { useEffect, useRef } from "react";
 import CountUp from "react-countup";
 import { BounceLoader } from "react-spinners";
 
-function PlayerCard({ name, ready, timerOn, wallet }) {
+function PlayerCard({ name, ready, timerOn, wallet, type }) {
    const currentWallet = useRef(0);
    useEffect(() => {
       currentWallet.current = wallet;
    }, [wallet]);
    return (
-      <div className={`player-card ${name === "You" ? "you" : "opponent"}`}>
+      <div className={`player-card ${type === "YOU" ? "you" : "opponent"}`}>
          {<h3>{name}</h3>}
          <div className="choise-status">
             {!timerOn ? (

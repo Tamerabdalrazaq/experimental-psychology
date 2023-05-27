@@ -24,7 +24,6 @@ const {
    DEBRIEF,
    FIRST_SET_FINISHED,
    PRE_TRAINING_INSTRUCTIONS,
-   OPPONENT_DESCRIPTION_INSTRUCTIONS,
 } = UI_DATA;
 
 export default function useExperimentFlow() {

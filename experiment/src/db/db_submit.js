@@ -2,6 +2,7 @@ import { addDoc, collection } from "@firebase/firestore";
 import { firestore } from "../db/firebase";
 import { config } from "../exp_config/experiment_config";
 import { waitForPendingWrites } from "@firebase/firestore";
+import { getDate } from "../helpers/helpers";
 
 const types = config.GAME_TYPES;
 const {
@@ -41,6 +42,8 @@ function prepare_data_shipping(context_data) {
       general_questions: context_data.general_questions.current,
       subject_id: context_data.subject_id.current,
       started_at: context_data.curr_date.current,
+      finished_at: getDate(),
+      subject_type: context_data.subject_type.current,
    };
    return prepared;
 }

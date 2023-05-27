@@ -41,7 +41,8 @@ const DictatorGameView = forwardRef(({}, ref) => {
                <p>
                   Please choose how much to {bold_underlineText("give")}{" "}
                   {subjectContext.getOpName()}, the remainder would be added to
-                  your final amount.
+                  your final amount. For example, if you chose 60 points, Dana
+                  will get 60 and you will get 40.
                </p>
             ),
             AR: (
@@ -50,14 +51,15 @@ const DictatorGameView = forwardRef(({}, ref) => {
                   {bold_underlineText(" إعطاء " + subjectContext.getOpName())}
                   {"."}
                   القيمة التي ستختارينها ستَضاف للنتيجة النهائية لكما وفقاً لما
-                  أخترتِ
+                  أخترتِ. على سبيل المثال، اذا اخترتِ 60 نقطة، ستحصل دانة على 60
+                  وأنت على 40.
                </p>
             ),
          },
       ],
       GIVE: {
          EN: "Give",
-         AR: "أعطِ",
+         AR: "أعطِي",
       },
    };
 

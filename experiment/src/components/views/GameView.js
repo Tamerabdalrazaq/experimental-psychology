@@ -24,8 +24,8 @@ const GameView = forwardRef(({ type, opponent_name, your_name }, ref) => {
 
    useImperativeHandle(ref, () => ({
       allow_next() {
-         // return subjectFinishedSet();
-         return true;
+         return subjectFinishedSet();
+         // return true;
       },
    }));
 

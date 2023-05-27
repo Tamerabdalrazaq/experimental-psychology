@@ -122,14 +122,14 @@ export const UI_DATA = {
             AR: ".انت مدعو/ة للمشاركة في دراسة التي تُجرى كجزء من كورس في علم النفس التجريبي في جامعة تل أبيب",
          },
          {
-            EN: "You will be asked to read several short paragraphs in both Arabic and Hebrew, and then participate in a number of tasks/games. The expected time for participation is approximately 13 minutes.",
-            AR: "سيُطلب منك قراءة عدَّة فقرات قصيرة في اللغتين العربيَّة والعبريَّة ومن ثم الاشتراك في عدد من المهام/الألعاب. من المُتَوقَّع أن يستغرق وقت المشاركة حوالي 13 دقيقة.            ",
+            EN: "You will be asked to participate in a number of tasks/games. The expected time for participation is approximately 13 minutes.",
+            AR: "سيُطلب منك الاشتراك في عدد من المهام/الألعاب. من المُتَوقَّع أن يستغرق وقت المشاركة حوالي 13 دقيقة.",
          },
          {
             EN: (
                <p>
                   If you feel uncomfortable, you have the right to withdraw at
-                  any time. If you choose to withdraw from the study, youذ
+                  any time. If you choose to withdraw from the study, you
                   {bold_underlineText(" will not ")}
                   be able to return.
                </p>
@@ -292,7 +292,7 @@ export const UI_DATA = {
       title: { EN: "What We Will DO", AR: "ماذا سنفعل" },
       instructions: [
          {
-            EN: "Now we will play a series of 3 rounds with a computer-controlled fictional charachter named Dana.",
+            EN: "Now we will play a series of 3 rounds with a fictional charachter named Dana.",
             AR: "سنبدأ سلسلة من 3 جولات، بها ستلعبين مع شخصيّة افتراضيّة اسمها دانة.",
          },
          {
@@ -303,34 +303,27 @@ export const UI_DATA = {
             EN: "Press Next to procede to the game.",
             AR: 'اضغطي على "التالي" للاستمرار.',
          },
+         {
+            EN: "Press Next to procede to the game.",
+            AR: 'اضغطي على "التالي" للاستمرار.',
+         },
+         {
+            EN: (
+               <h6>
+                  *Please note - from the next page and on, you would not be
+                  able to move backward.
+               </h6>
+            ),
+            AR: (
+               <h6>
+                  *يرجى الإنتباه - ابتداءً من المرحلة التالية، لن تتمكّن من
+                  العودة الى الوراء
+               </h6>
+            ),
+         },
       ],
    },
 
-   OPPONENT_DESCRIPTION_INSTRUCTIONS: {
-      title: { EN: "Your Opponent", AR: "..." },
-      instructions: [
-         {
-            EN: "You will be playing with a computer-controlled fictional character named Amir Mizrahi, is 24, he’s a straight man with brown eyes, who is weighing roughly 76 kg. He has 2 siblings, one older and one younger. ",
-            AR: "...",
-         },
-      ],
-   },
-   POST_LEARNING_INSTRUCTIONS: {
-      title: {
-         EN: "Learning Phase Completed!",
-         AR: "...",
-      },
-      instructions: [
-         {
-            EN: "Thank you for playing the first set. The score previously would not count towards your final score.",
-            AR: "...",
-         },
-         {
-            EN: "You will now continue to play against the same player. From now on your behavior would count towards your final score",
-            AR: "...",
-         },
-      ],
-   },
    POST_LEARNING_INSTRUCTIONS: {
       title: { EN: "Let the game begin!", AR: "لعبتنا ستبدأ الآن" },
       instructions: [],
@@ -367,7 +360,7 @@ export const UI_DATA = {
             ),
             AR: (
                <p>
-                  {`نودُّ تذكيركِ بأن قد لعبتِ مع `}{" "}
+                  {`نودُّ تذكيركِ بأنك قد لعبتِ مع `}{" "}
                   {bold_underlineText("حاسوب")}.
                </p>
             ),

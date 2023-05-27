@@ -9,13 +9,15 @@ function App() {
    const subject_exposed_to_training = window.localStorage.getItem(
       "subject_exposed_to_training"
    );
+   const subject_admin = window.localStorage.getItem("subject_admin");
+
    useEffect(() => {
       if (window.innerWidth <= 800) setShowMobileWarning(true);
-      if (subject_exposed_to_training)
-         console.error("Subject was exposed before!");
    }, []);
 
-   if (showMobileWarning) return <MobileWarning />;
+   if (showMobileWarning) return <MobileWarning type={"DEVICE"} />;
+   if (subject_exposed_to_training && !subject_admin)
+      return <MobileWarning type={"SUBJECT_EXPOSED"} />;
    return (
       <SubjectContextProvider>
          <div className="App">

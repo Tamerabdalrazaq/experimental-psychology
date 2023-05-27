@@ -8,23 +8,20 @@ function YourOpponentView() {
    const context = useContext(SubjectContext);
    const { getOpName, lang } = context;
    const instructions = {
-      title: { EN: "Your Opponent", AR: "من هو الخصم؟" },
+      title: { EN: "Your Opponent", AR: "من الخصم؟" },
       instructions: [
          {
             EN: (
                <p>
-                  You will be playing with a computer-controlled fictional
-                  character named{" "}
-                  {bold_underlineText(getValByLang(getOpName()))}. She is 24, a
-                  straight woman with brown eyes, who is weighing roughly 64 kg.
-                  She has 2 siblings, one older and one younger.
+                  {bold_underlineText(getValByLang(getOpName()))} is 24, a woman
+                  with brown eyes, who is weighing roughly 64 kg. She has 2
+                  siblings, one older and one younger.
                </p>
             ),
             AR: (
                <p>
-                  {`سوف تلعب مع شخصية خيالية متحكمة بواسطة الكمبيوتر تدعى `}
-                  {bold_underlineText(getValByLang(getOpName()))}.{" "}
-                  {`هي امرأة مباشرة تبلغ من العمر 24 عامًا، لها عيون بنية، وتزن حوالي 64 كيلوغرامًا. لديها شقيقين، أحدهما أكبر سنًا والآخر أصغر}.`}
+                  {bold_underlineText(getValByLang(getOpName()))}{" "}
+                  {` تبلغ من العمر 24 عامًا، لها عيون بنية، وتزن حوالي 64 كيلوغرامًا. لديها شقيقين، أحدهما أكبر سنًا والآخر أصغر.`}
                </p>
             ),
          },

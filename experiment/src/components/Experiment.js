@@ -20,12 +20,16 @@ function Experiment() {
          window.localStorage.setItem("subject_exposed_to_training", true);
       }
    }, [current_view.props.type]);
+
+   const allow_next = () =>
+      !childRef.current ||
+      !childRef.current.allow_next ||
+      childRef.current.allow_next();
+
+   console.log(allow_next());
+
    const button_click = (dir) => {
-      if (
-         !childRef.current ||
-         !childRef.current.allow_next ||
-         childRef.current.allow_next()
-      ) {
+      if (allow_next()) {
          setProgress((curr) => {
             return Math.min(Math.max(curr + dir, 0), experimentFlow.length - 1);
          });

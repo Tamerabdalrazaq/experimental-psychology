@@ -69,7 +69,7 @@ export function getDate() {
       (today.getMonth() + 1) +
       "\\" +
       today.getDate() +
-      "-" +
+      " - " +
       today.getHours() +
       ":" +
       today.getMinutes();
