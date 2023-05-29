@@ -191,7 +191,7 @@ export const UI_DATA = {
          },
          {
             EN: {
-               label: "Is your phone on silent / off? (Please check this box if so) ",
+               label: "Is your phone on silent / off? ",
 
                checked: true,
             },
@@ -298,10 +298,6 @@ export const UI_DATA = {
          {
             EN: "In the first round of the 3, you'll learn how Dana plays. Her behaviour is consistent througout the experiment.",
             AR: "في الجولة الأولى، ستتعلمين كيف تلعب دانة. طريقة لعبها ثابتة حتى نهاية التجربة.",
-         },
-         {
-            EN: "Press Next to procede to the game.",
-            AR: 'اضغطي على "التالي" للاستمرار.',
          },
          {
             EN: "Press Next to procede to the game.",
