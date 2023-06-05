@@ -33,7 +33,7 @@ export function SubjectContextProvider({ children }) {
       else if (rand < 0.5) subject_type.current = EARLY_OUT;
       else if (rand < 0.75) subject_type.current = LATE_IN;
       else if (rand <= 1) subject_type.current = LATE_OUT;
-      console.log("[DEV] Subject Type: " + subject_type.current);
+      console.log("[DEV - V3.1] Subject Type: " + subject_type.current);
    }, []);
 
    function resetWallet() {

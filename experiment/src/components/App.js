@@ -15,9 +15,31 @@ function App() {
       if (window.innerWidth <= 800) setShowMobileWarning(true);
    }, []);
 
-   if (showMobileWarning) return <MobileWarning type={"DEVICE"} />;
+   if (!subject_admin)
+      return (
+         <MobileWarning
+            title={"Participating in the study is currently not allowed."}
+         />
+      );
+
+   if (showMobileWarning)
+      return (
+         <MobileWarning
+            title={
+               "Unfortunately, you can only access this experiment from a wide screen."
+            }
+            message={`* If you're on Ipad, please switch to portrait mode and
+            refresh the page`}
+         />
+      );
    if (subject_exposed_to_training && !subject_admin)
-      return <MobileWarning type={"SUBJECT_EXPOSED"} />;
+      return (
+         <MobileWarning
+            title={"Unfortunately, you can't take this experiment twice."}
+            message={`If you think this is a mistake, please contact the reseracher
+            in charge - Ayan Oudetallah.`}
+         />
+      );
    return (
       <SubjectContextProvider>
          <div className="App">
