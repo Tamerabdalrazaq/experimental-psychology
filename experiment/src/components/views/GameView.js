@@ -24,13 +24,18 @@ const GameView = forwardRef(({ type, opponent_name, your_name }, ref) => {
 
    useImperativeHandle(ref, () => ({
       allow_next() {
-         return subjectFinishedSet();
+         return subjectFinishedSet() || subjectAdmin();
          // return true;
       },
    }));
 
    function subjectFinishedSet() {
       return set_history.current.length >= rounds || finished;
+   }
+
+   function subjectAdmin() {
+      const is_admin = window.localStorage.getItem("subject_admin");
+      return is_admin;
    }
 
    useEffect(() => {
